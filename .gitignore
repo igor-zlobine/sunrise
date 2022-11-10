@@ -1,3 +1,25 @@
+# Created by https://www.gitignore.io
+
+### PhpStorm ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+
+*.iml
+
+## Directory-based project format:
+.idea/
+
+## File-based project format:
+*.ipr
+*.iws
+
+## Plugin-specific files:
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+*.sublime-project
+*.sublime-workspace
+
 # Cache and logs (Symfony2)
 /app/cache/*
 /app/logs/*
