@@ -1,0 +1,42 @@
+mapping-config:
+
+  options-extend:
+    InputOptions:
+      KeysToCamelCase: LetsCompose\Core\DataMapper\Options\KeysToCamelCaseOption
+
+  default-options:
+    InputOptions:
+      KeysToCamelCase: true
+
+  mapping-schema-template:
+    properties_template:
+      InputOptions:
+          StrictPropertyPath: true
+          KeysToCamelCase: false
+      Mapping:
+        Properties:
+          InputOptions:
+              StrictPropertyPath: false
+              KeysToCamelCase: false
+          Mapping:
+            keyOne: key_onesdfa
+            keyTwo: key_two
+            keyThree: key_three.key_a
+
+  mapping-schema:
+    schema-one:
+      Mapping:
+        keyOne: key_one
+        keyTwo: key_two
+        keyThree:
+          Options:
+             MappedKey: key_three
+          Mapping:
+            keyA: key_a
+
+    schema-two:
+      MappingTemplate: properties_template
+#      Options:
+#        Output:
+#          Object: non-template-object
+

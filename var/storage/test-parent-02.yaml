@@ -1,0 +1,14 @@
+parser-behavior:
+  imports:
+    - 'test-import-02.yaml'
+  parameters:
+    param1: 'parent-02 param1 default'
+    param4: 'parent-02 param2 default'
+
+
+
+parameters:
+  hello: 'parent-02 %param1%'
+  toi: 'parent-02 %param2%'
+  moi: 'parent-02 c moi'
+  sadf: 'parent-02 c moi'
