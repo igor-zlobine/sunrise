@@ -1,0 +1,30 @@
+http_client:
+
+  default_request_options:
+      for_all:
+        headers: []
+        query_params: []
+        uri_prefix: '123'
+      by_method:
+        -
+          headers: ~
+          query_params: ~
+          uri_prefix: '456'
+          apply_for: ['POST', 'GET']
+          use_defaults: false
+
+
+
+  actions:
+    activation-codes:
+      upload:
+        request:
+          use_defaults: true
+          method: POST
+          uri: /activation-code/import-file
+        response:
+          mapping_key: "activation-codes.upload-file"
+        exception:
+          business_exception_on_response_code: [400, 401, 404]
+          exception_message: "There seems to be a problem with your file. Please verify that your file matches the requirements explained above and re-upload it"
+          mapping_key: "exception.activation-codes.upload"
