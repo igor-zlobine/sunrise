@@ -1,0 +1,25 @@
+
+parser-behavior:
+  extends:
+    - 'test-parent-01.yaml'
+    - 'test-parent-02.yaml'
+  imports:
+##    - '%import_file%'
+    -
+      source: '%import_file%'
+      loader:  LetsCompose\Core\Parser\Loader\YamlContentLoader
+      config:
+        aaa: bbb
+        bbb: ccc
+
+
+  parameters:
+    param1: 'rewrite child param1 default'
+    param2: 'child param2 default'
+    param_test: 'child param2 default'
+
+
+parameters:
+  hello: 'child %param1%'
+  toi: 'child %param2%'
+  param_rewrite_test: 'param: %param_test%'

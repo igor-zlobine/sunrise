@@ -1,0 +1,2 @@
+parameters:
+  imported_too: 'coucou %param1%'

@@ -1,0 +1,16 @@
+parser-behavior:
+  extends:
+    - 'test-parent-02.yaml'
+  import:
+    - 'test-import-01.yaml'
+#    - 'test-import-01.yaml'
+  parameters:
+    param1: 'parent-01 param1 default'
+    param3: 'parent-01 param2 default'
+    param4: '%import_file%'
+
+
+parameters:
+  hello: 'parent-01 %param1%'
+  toi: 'parent-01 %param2%'
+  moi: 'parent-01 c moi'

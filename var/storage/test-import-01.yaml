@@ -1,0 +1,2 @@
+parameters:
+  imported_param: 'i am imported 0000000-one %param1%'
