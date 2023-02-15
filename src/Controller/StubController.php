@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-
 class StubController extends AbstractController
 {
     #[Route('/stub', name: 'route_stub')]
