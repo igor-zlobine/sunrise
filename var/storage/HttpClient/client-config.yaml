@@ -1,19 +1,39 @@
 http_client:
+  parameters:
+    name: 'API Activation Code client'
 
-  default_request_options:
-      for_all:
-        headers: []
-        query_params: []
-        uri_prefix: '123'
-      by_method:
-        -
-          headers: ~
-          query_params: ~
-          uri_prefix: '456'
-          apply_for: ['POST', 'GET']
-          use_defaults: false
+  options-extend:
+    mapping_key:
+      class: LetsCompose\Mapper
+      config: 'schema\mapping\activation-code.yaml'
+      loader:
+        class: ServiceContainer
+        config: ~
 
+  default_request_config:
+    for_all:
+      headers: []
+      query_params: []
+      uri_prefix: '123'
+    by_method:
+      -
+        headers: ~
+        query_params: ~
+        uri_prefix: '456'
+        apply_for: ['POST', 'GET']
+        use_defaults: false
 
+  default_response_config:
+    headers: ~
+
+  default_response_exception_config:
+    message_prefix: '[{action_name}]'
+    exceptions:
+      -
+        class: Exceptions\BadRequestException
+        code: 400
+        message: 'Error on API Call'
+        throw_on_http_code: [400]
 
   actions:
     activation-codes:
@@ -24,7 +44,9 @@ http_client:
           uri: /activation-code/import-file
         response:
           mapping_key: "activation-codes.upload-file"
-        exception:
-          business_exception_on_response_code: [400, 401, 404]
-          exception_message: "There seems to be a problem with your file. Please verify that your file matches the requirements explained above and re-upload it"
-          mapping_key: "exception.activation-codes.upload"
+        response_exception:
+          message_prefix: ''
+          exceptions:
+            Exceptions\GeneralException:
+              code: 400
+              message: 'resource not found exception'
