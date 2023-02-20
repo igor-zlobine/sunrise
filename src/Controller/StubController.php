@@ -23,6 +23,7 @@ use LetsCompose\Core\Storage\FileSystem\FileStorage;
 use LetsCompose\Core\Tools\ArrayHelper;
 use LetsCompose\Core\Tools\Data\DataPropertyAccessor;
 use LetsCompose\Core\Tools\Data\Hydrator;
+use LetsCompose\Core\Tools\ObjectHelper;
 use LetsCompose\Core\Tools\Storage\ResourceInfoHelper;
 use LetsCompose\Core\Tools\StringHelper;
 use LetsCompose\Core\Tools\SystemHelper;
@@ -40,6 +41,15 @@ class StubController extends AbstractController
     #[Route('/stub', name: 'route_stub')]
     public function stub(): Response
     {
+
+//        $test  = new test();
+//        $key = '\plop';
+//        $test->check[$key] = 'coucou';
+//
+//        dump($test->testCheck());
+//
+//        die;
+
 //
 //         $a = [
 //             'key1' => 'value1',
@@ -274,6 +284,14 @@ class test {
     public $propertyC = 'defaultC';
     private $propertyD = 'defaultD';
     private $propertyE = 'defaultE';
+
+    public ?array $check = null;
+
+
+    public function testCheck()
+    {
+        return $this->check['\plop'] ?? 'flop';
+    }
 
     /**
      * @return string

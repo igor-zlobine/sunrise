@@ -4,24 +4,23 @@ http_client:
 
   options-extend:
     mapping_key:
-      class: LetsCompose\Mapper
-      config: 'schema\mapping\activation-code.yaml'
-      loader:
-        class: ServiceContainer
-        config: ~
-
-  default_request_config:
-    for_all:
-      headers: []
-      query_params: []
-      uri_prefix: '123'
-    by_method:
-      -
-        headers: ~
-        query_params: ~
-        uri_prefix: '456'
-        apply_for: ['POST', 'GET']
-        use_defaults: false
+      LetsCompose\Core\HttpClient\Option\MapKeysOption:
+        config: 'schema\mapping\activation-code.yaml'
+        loader:
+          class: LetsCompose\Core\HttpClient\Option\MapKeysOptionLoader
+          config: ~
+#  default_request_config:
+#    for_all:
+#      headers: []
+#      query_params: []
+#      uri_prefix: '123'
+#    by_method:
+#      -
+#        headers: ~
+#        query_params: ~
+#        uri_prefix: '456'
+#        apply_for: ['POST', 'GET']
+#        use_defaults: false
 
   default_response_config:
     headers: ~
@@ -30,10 +29,10 @@ http_client:
     message_prefix: '[{action_name}]'
     exceptions:
       -
-        class: Exceptions\BadRequestException
+        class: LetsCompose\Core\Exception\InvalidLogicException
         code: 400
         message: 'Error on API Call'
-        throw_on_http_code: [400]
+        when_response_code: [400]
 
   actions:
     activation-codes:
@@ -42,11 +41,18 @@ http_client:
           use_defaults: true
           method: POST
           uri: /activation-code/import-file
+          options:
+            keys_to_camel_case: true
+
         response:
-          mapping_key: "activation-codes.upload-file"
+          options:
+            mapping_key: "activation-codes.upload-file"
+
         response_exception:
           message_prefix: ''
           exceptions:
-            Exceptions\GeneralException:
+            \InvalidArgumentException:
               code: 400
               message: 'resource not found exception'
+              default: true
+#              when_response_code: [400]
